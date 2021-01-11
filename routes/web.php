@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InspiringController;
-
+use App\Http\Controllers\PostController;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -19,42 +21,78 @@ use App\Http\Controllers\InspiringController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/hello-world', function () {
+// Route::get('/hello-world', function () {
+//     return view('hello_world');
+// });
+// Route::get('/about_us', function () {
+//     return view('about_us', ['name' => 'Laravel 6.0 範例']);
+// });
+// Route::get('/inspire', 'App\Http\Controllers\InspiringController@inspire');
 
-    return view('hello_world');
+// Route::get('/test', function(){
+//     return App\Models\Post::all();
+// });
+// Route::get('/edit', function(){
+//     $post = App\Models\Post::find(1);
+//     $post->content = 'Laravel demo';
+//     $post->save();
+//     return $post;
+// });
+// Route::get('/add1', function(){
+//     $post = new App\Models\Post;
+//     $post->subject_id=1;
+//     $post->user_id=1;
+//     $post->content = 'UUUUUU';
+//     $post->save();
+//     return $post;
+// });
+// Route::get('/add2', function(){
+//     $post = new App\Models\Post;
+//     $post->subject_id=2;
+//     $post->user_id=1;
+//     $post->content = 'JIEUN';
+//     $post->save();
+//     return $post;
+// });
+// Route::get('/sub1', function(){
 
-}); 
-Route::get('/about_us', function () {
+//     $post = new App\Models\Subject;
+//      $post->name = '電腦';
+//      $post->save();
+//      return $post;
+//  });
+//  Route::get('/sub2', function(){
+//     $post = new App\Models\Subject;
+//      $post->name = 'network';
+//      $post->save();
+//      return $post;
+//  });
+//  Route::get('/get1', function(){
+//     $subject = Subject::find(1);
+//     $posts = $subject->posts;
+//     return $posts;
+// });
 
-    return view('about_us', ['name' => 'Laravel 6.0 範例']);
+// Auth::routes();
 
-}); 
-Route::get('/inspire', 'App\Http\Controllers\InspiringController@inspire'); 
-
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test', function(){
 
-    return App\Models\Post::all();
+    Illuminate\Support\Facades\Log::info('觸發 Test');
 
-}); 
-Route::get('/edit', function(){
+});
+Route::get('/test', function(){
 
-    $post = App\Models\Post::find(1);
+    $subject = Subject::find(Auth::id());
 
-    $post->content = 'Laravel demo';
+    $posts = $subject->posts;
 
-    $post->save();
+    return $posts;
 
-    return $post;
+});
+Route::resource('posts', 'App\Http\Controllers\PostController');
 
-}); 
-Route::get('/add', function(){
 
-    $post = new App\Models\Post;
+Auth::routes();
 
-    $post->content = 'ABCDEF';
-
-    $post->save();
-
-    return $post;
-
-}); 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

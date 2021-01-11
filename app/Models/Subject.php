@@ -13,4 +13,18 @@ class Subject extends Model
         'name'
 
     ];
+
+    /**
+
+ * @return \Illuminate\Database\Eloquent\Relations\HasMany
+
+ */
+
+public function posts()
+    {
+
+    return $this->hasMany(Post::class);
+
+    } 
 }
+
