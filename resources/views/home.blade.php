@@ -14,7 +14,6 @@
                     @endif
                     {{ __('You are logged in!') }}
                 </div>
-                    <button onclick="location.href='http://localhost:85/LaravelDemo/public/posts/create'">新增文章</button>
                     <button onclick="location.href='http://localhost:85/LaravelDemo/public/posts'">查看所有文章</button>
             </div>
         </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InspiringController;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('posts.index',['posts' => Post::cursor()]);
 });
 // Route::get('/hello-world', function () {
 //     return view('hello_world');
